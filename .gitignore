@@ -1,0 +1,18 @@
+# Токен API (конфіденційна інформація)
+apikey.txt
+
+# База даних
+*.db
+
+# Python кеші
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+
+# Системні
+.DS_Store
+Thumbs.db
