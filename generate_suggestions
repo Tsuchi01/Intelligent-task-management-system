@@ -1,0 +1,18 @@
+import pytest
+from unittest.mock import MagicMock
+from your_module import T5Helper
+
+def test_generate_suggestions_empty():
+    t5 = T5Helper(api_url="mock-api.com", api_token="mock-token")
+    result = t5.generate_suggestions([])
+    assert result == "Немає завдань для аналізу.", "Expected message when no tasks."
+
+def test_generate_suggestions_with_data():
+    t5 = T5Helper(api_url="mock-api.com", api_token="mock-token")
+    tasks = [
+        (1, "Task 1", "Description", "2024-12-01 12:00", 0, 3)
+    ]
+    t5.query = MagicMock(return_value=[{"generated_text": "Example suggestion"}])
+    result = t5.generate_suggestions(tasks)
+    assert "Завдання: Task 1" in result, "Task title not in suggestion"
+    assert "Рекомендація: Example suggestion" in result, "Expected suggestion not found."
