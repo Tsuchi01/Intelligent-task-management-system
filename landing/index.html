@@ -1,75 +1,88 @@
 <!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Інтелектуальна система керування завданнями — AI-засіб підтримки управління персональними завданнями.">
-  <meta name="keywords" content="AI, T5, Task Manager, інтелектуальна система, SQLite, бакалаврська робота">
-  <meta name="author" content="Лемак Вадим Віталійович">
-  <meta property="og:title" content="Інтелектуальна система керування завданнями">
-  <meta property="og:description" content="Інтелектуальна система підтримки управління задачами на основі T5-моделі">
-  <meta property="og:url" content="https://tsuchi01.github.io/Intelligent-task-management-system/">
-  <meta property="og:image" content="img/preview.jpg">
-  <link rel="icon" href="img/favicon-multi.ico" type="image/x-icon">
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/style.css">
-  <title>Інтелектуальна система керування завданнями</title>
-</head>
-<body itemscope itemtype="https://schema.org/TechArticle">
-<header role="banner">
-  <img src="img/sumdu-logo.png" alt="Логотип Сумського державного університету" width="100" />
-  <h1 itemprop="headline">Інтелектуальна система керування завданнями</h1>
-  <h2>Intelligent Task Management System</h2>
-  <p>Бакалаврська робота студента Лемака Вадима</p>
-</header>
+  <html lang="uk" itemscope itemtype="https://schema.org/TechArticle">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description"
+          content="Інтелектуальна система керування завданнями — AI-засіб підтримки персональних задач.">
+    <meta name="keywords"
+          content="AI, Task Manager, T5, інтелектуальна система, диплом, бакалаврська робота, SQLite, рекомендації">
+    <meta name="author" content="Лемак Вадим Віталійович">
 
-<main class="container" role="main">
-  <section aria-labelledby="description">
-    <h2 id="description">Короткий опис</h2>
-    <p itemprop="description">Система аналізує задачі користувача та генерує індивідуальні поради з використанням AI-моделі T5. Підтримує локальне збереження в SQLite, працює через зручний інтерфейс.</p>
-  </section>
+    <!-- Open Graph -->
+    <meta property="og:title" content="Інтелектуальна система керування завданнями">
+    <meta property="og:description" content="Система керування задачами з AI-рекомендаціями на базі T5">
+    <meta property="og:url" content="https://tsuchi01.github.io/Intelligent-task-management-system/">
+    <meta property="og:image" content="img/preview.jpg">
 
-  <section aria-labelledby="keywords">
-    <h2 id="keywords">Ключові слова</h2>
-    <p>Штучний інтелект, генерація тексту, T5, управління завданнями, рекомендації</p>
-  </section>
+    <link rel="icon" href="img/favicon-multi.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Інтелектуальна система керування завданнями</title>
+  </head>
+  <body>
+  <header role="banner">
+    <img src="img/sumdu-logo.png" alt="Логотип Сумського державного університету" width="100"/>
+    <h1 itemprop="headline">Інтелектуальна система керування завданнями</h1>
+    <h2>Intelligent Task Management System</h2>
+    <p>Бакалаврська робота студента Лемака Вадима</p>
+  </header>
 
-  <section aria-labelledby="goal">
-    <h2 id="goal">Мета дослідження</h2>
-    <p>Створити ефективну систему управління завданнями з автоматичною генерацією кроків виконання на основі вхідних даних.</p>
-  </section>
+  <main class="container" role="main">
+    <section aria-labelledby="desc">
+      <h2 id="desc">Короткий опис</h2>
+      <p itemprop="description">AI-система допомагає керувати завданнями через генерацію персоналізованих рекомендацій
+        за допомогою T5, SQLite і Tkinter.</p>
+    </section>
 
-  <section aria-labelledby="tasks">
-    <h2 id="tasks">Основні завдання</h2>
-    <ul>
-      <li>Інтерфейс користувача через Tkinter</li>
-      <li>Інтеграція моделі T5</li>
-      <li>База даних SQLite</li>
-      <li>Генерація інструкцій</li>
-      <li>Оптимізація структури зберігання</li>
-    </ul>
-  </section>
+    <section aria-labelledby="keys">
+      <h2 id="keys">Ключові слова</h2>
+      <ul>
+        <li>AI</li>
+        <li>генерація тексту</li>
+        <li>управління завданнями</li>
+        <li>бакалаврська</li>
+        <li>інтерфейс</li>
+      </ul>
+    </section>
 
-  <section aria-labelledby="results">
-    <h2 id="results">Очікувані результати</h2>
-    <p>Підвищення ефективності планування і виконання завдань користувачем, персоналізовані AI-рекомендації.</p>
-  </section>
+    <section aria-labelledby="goal">
+      <h2 id="goal">Мета дослідження</h2>
+      <p>Створити систему з автоматичною генерацією кроків виконання задач користувача за допомогою ШІ.</p>
+    </section>
 
-  <section aria-labelledby="contacts">
-    <h2 id="contacts">Контактна інформація</h2>
-    <p>Автор: Лемак Вадим Віталійович</p>
-    <p>Email: <a href="mailto:lemak.vadim11@gmail.com">lemak.vadim11@gmail.com</a></p>
-    <p>GitHub: <a href="https://github.com/Tsuchi01" target="_blank">Tsuchi01</a></p>
-  </section>
+    <section aria-labelledby="tasks">
+      <h2 id="tasks">Основні завдання</h2>
+      <ul>
+        <li>Tkinter-графічний інтерфейс</li>
+        <li>Інтеграція T5 через API</li>
+        <li>SQLite-структура</li>
+        <li>Генерація рекомендацій</li>
+        <li>Адаптивний інтерфейс</li>
+      </ul>
+    </section>
 
-  <section aria-labelledby="visual">
-    <h2 id="visual">Візуалізація</h2>
-    <img src="img/app-screenshot.png" alt="Знімок екрана інтерфейсу системи" loading="lazy" />
-  </section>
-</main>
+    <section aria-labelledby="results">
+      <h2 id="results">Очікувані результати</h2>
+      <p>Персоналізовані поради, краща організація завдань, швидка інтеграція і збереження.</p>
+    </section>
 
-<footer role="contentinfo">
-  <p>&copy; 2025 Лемак Вадим, СумДУ</p>
-</footer>
-</body>
-</html>
+    <section aria-labelledby="contact">
+      <h2 id="contact">Контактна інформація</h2>
+      <p>Автор: <span itemprop="author">Лемак Вадим Віталійович</span></p>
+      <p>Email: <a href="mailto:lemak.vadim11@gmail.com">lemak.vadim11@gmail.com</a></p>
+      <p>GitHub: <a href="https://github.com/Tsuchi01" target="_blank">Tsuchi01</a></p>
+    </section>
+
+    <section aria-labelledby="visual">
+      <h2 id="visual">Візуалізація</h2>
+      <img src="img/app-screenshot.png" alt="Знімок екрана інтерфейсу системи" loading="lazy"/>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2025 Лемак Вадим, СумДУ</p>
+  </footer>
+  </body>
+  </html>
+
