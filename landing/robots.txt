@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tsuchi01.github.io/Intelligent-task-management-system/sitemap.xml
