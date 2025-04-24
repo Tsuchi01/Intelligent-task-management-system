@@ -1,0 +1,18 @@
+[MASTER]
+ignore=.venv
+
+[MESSAGES CONTROL]
+disable=
+    C0114,  # missing-module-docstring
+    C0115,  # missing-class-docstring
+    C0116,  # missing-function-docstring
+    W0612,  # unused-variable
+    W0611,  # unused-import
+    W0718,  # broad-exception-caught
+    R0902   # too-many-instance-attributes
+
+[FORMAT]
+max-line-length=130
+
+[DESIGN]
+max-attributes=18
