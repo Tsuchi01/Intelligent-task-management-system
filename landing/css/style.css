@@ -5,15 +5,18 @@ body {
   line-height: 1.6;
   scroll-behavior: smooth;
 }
+
 header {
   background: #2a5298;
   color: white;
   text-align: center;
   padding: 2rem;
 }
+
 header h1, header h2 {
   margin: 0.5rem 0;
 }
+
 .container {
   max-width: 960px;
   margin: 2rem auto;
@@ -21,11 +24,13 @@ header h1, header h2 {
   background: white;
   border-radius: 8px;
 }
+
 h2 {
   color: #1e3c72;
   margin-top: 1.5rem;
   font-size: 1.5rem;
 }
+
 footer {
   background-color: #1e3c72;
   color: white;
@@ -33,20 +38,44 @@ footer {
   padding: 1rem;
   margin-top: 2rem;
 }
+
 img {
   max-width: 100%;
   height: auto;
   border-radius: 6px;
 }
+
 a {
   color: #2a5298;
   text-decoration: none;
 }
+
 a:hover, a:focus {
   text-decoration: underline;
   outline: 2px dashed #2a5298;
   outline-offset: 2px;
 }
+
 ul {
   list-style-position: inside;
+}
+
+/* Медіа-запити для мобільних пристроїв */
+@media (max-width: 768px) {
+  header {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .container {
+    margin: 1rem;
+    padding: 0.8rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
 }
