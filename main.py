@@ -1,4 +1,5 @@
 """Модуль управління завданнями з AI-рекомендаціями через Tkinter і T5."""
+
 import sqlite3
 import http.client
 import json
@@ -16,7 +17,17 @@ logger = logging.getLogger(__name__)
 
 
 class T5Helper:
-    """Клас для інтеграції з моделлю T5 через API."""
+    """
+    Сервісний клас для інтеграції з API моделі T5 (Hugging Face).
+
+    Дозволяє формувати запити до моделі та отримувати згенеровані текстові рекомендації
+    на основі вхідного запиту (prompt). Використовується для генерації інтелектуальних
+    порад щодо виконання завдань.
+
+    Атрибути:
+        api_url (str): Домен API Hugging Face.
+        api_token (str): Токен авторизації для доступу до моделі.
+    """
 
     def __init__(self, api_url="api-inference.huggingface.co", token_file="apikey.txt"):
         self.api_url = api_url
@@ -57,7 +68,15 @@ class T5Helper:
             return {"error": str(exc), "status_code": 500}
 
     def generate_suggestions(self, tasks):
-        """Генерує рекомендації на основі задач."""
+        """
+        Генерує текстові рекомендації для кожного завдання зі списку.
+
+        Args:
+            tasks (list): Список кортежів із деталями завдань з бази даних.
+
+        Returns:
+            str: Згенеровані поради або повідомлення про помилку.
+        """
         if not tasks:
             return "Немає завдань для аналізу."
 
@@ -90,7 +109,13 @@ class T5Helper:
 
 
 class TaskManager:
-    """Клас для управління базою даних завдань."""
+    """
+    Клас для керування збереженням, оновленням та видаленням завдань у базі даних SQLite.
+
+    Атрибути:
+        db_name (str): Назва SQLite-файлу.
+        tasks (list): Кешований список завдань з бази даних.
+    """
 
     def __init__(self):
         self.db_name = "tasks.db"
@@ -125,7 +150,15 @@ class TaskManager:
         logger.info("Завдання успішно завантажено з бази.")
 
     def add_task(self, title, description, deadline, priority):
-        """Додає нову задачу до бази."""
+        """
+        Додає нову задачу до бази.
+
+        Args:
+            title (str): Назва задачі.
+            description (str): Опис задачі.
+            deadline (str): Крайній термін виконання.
+            priority (int): Пріоритет (1-5).
+        """
         conn = sqlite3.connect(self.db_name)
         cursor = conn.cursor()
         cursor.execute("""
@@ -215,7 +248,12 @@ class TaskApp:
             self.tasks_listbox.insert(tk.END, display_text)
 
     def add_task(self):
-        """Додає задачу з інтерфейсу."""
+        """
+        Отримує вхідні дані з інтерфейсу, перевіряє їх та додає завдання в базу.
+
+        Валідує пріоритет (1-5). У разі помилки показує повідомлення.
+        Якщо все коректно — оновлює список і очищає поля форми.
+        """
         title = self.title_entry.get()
         description = self.desc_entry.get()
         deadline = self.deadline_entry.get()
