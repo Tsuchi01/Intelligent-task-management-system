@@ -1,12 +1,18 @@
 """Модуль управління завданнями з AI-рекомендаціями через Tkinter і T5."""
-
 import sqlite3
 import http.client
 import json
 import time
-from datetime import datetime
+import logging
 import tkinter as tk
 from tkinter import messagebox
+from datetime import datetime
+
+from logging_config import setup_logging
+
+# Налаштування логування
+setup_logging()
+logger = logging.getLogger(__name__)
 
 
 class T5Helper:
@@ -22,7 +28,7 @@ class T5Helper:
             with open(token_file, "r", encoding="utf-8") as file:
                 return file.readline().strip()
         except FileNotFoundError:
-            print(f"Файл {token_file} не знайдено. Перевірте шлях.")
+            logger.error(f"Файл {token_file} не знайдено. Перевірте шлях.")
             return ""
 
     def query(self, prompt):
@@ -38,13 +44,16 @@ class T5Helper:
             res = conn.getresponse()
             data = res.read().decode("utf-8")
             if res.status == 200:
+                logger.info("Успішний запит до моделі T5.")
                 return json.loads(data)
             if res.status == 503:
-                print("Модель ще завантажується, повторюємо запит...")
+                logger.warning("Модель T5 ще завантажується. Повторюємо запит...")
                 time.sleep(10)
                 return self.query(prompt)
+            logger.warning(f"Помилка відповіді моделі T5: {data}")
             return {"error": data, "status_code": res.status}
         except Exception as exc:
+            logger.exception("Сталася помилка при запиті до моделі T5.")
             return {"error": str(exc), "status_code": 500}
 
     def generate_suggestions(self, tasks):
@@ -104,6 +113,7 @@ class TaskManager:
         """)
         conn.commit()
         conn.close()
+        logger.info("Базу даних tasks.db створено або перевірено.")
 
     def load_tasks(self):
         """Завантажує задачі з бази."""
@@ -112,6 +122,7 @@ class TaskManager:
         cursor.execute("SELECT id, title, description, deadline, completed, priority FROM tasks")
         self.tasks = cursor.fetchall()
         conn.close()
+        logger.info("Завдання успішно завантажено з бази.")
 
     def add_task(self, title, description, deadline, priority):
         """Додає нову задачу до бази."""
@@ -123,6 +134,7 @@ class TaskManager:
         """, (title, description, deadline, priority))
         conn.commit()
         conn.close()
+        logger.info(f"Задача '{title}' додана до бази.")
 
     def mark_task_completed(self, task_id):
         """Позначає задачу як виконану."""
@@ -131,6 +143,7 @@ class TaskManager:
         cursor.execute("UPDATE tasks SET completed = 1 WHERE id = ?", (task_id,))
         conn.commit()
         conn.close()
+        logger.info(f"Задача ID {task_id} позначена як виконана.")
 
     def delete_task(self, task_id):
         """Видаляє задачу з бази."""
@@ -139,6 +152,7 @@ class TaskManager:
         cursor.execute("DELETE FROM tasks WHERE id = ?", (task_id,))
         conn.commit()
         conn.close()
+        logger.info(f"Задача ID {task_id} видалена.")
 
 
 class TaskApp:
@@ -210,6 +224,7 @@ class TaskApp:
             if not 1 <= priority <= 5:
                 raise ValueError
         except ValueError:
+            logger.warning("Невірний пріоритет задачі.")
             messagebox.showerror("Помилка", "Пріоритет повинен бути числом від 1 до 5.")
             return
 
@@ -219,6 +234,7 @@ class TaskApp:
 
     def get_ai_suggestions(self):
         """Отримує рекомендації на основі задач."""
+        logger.info("Отримання AI-рекомендацій.")
         suggestions = self.t5.generate_suggestions(self.manager.tasks)
         messagebox.showinfo("Рекомендації", suggestions)
 
@@ -230,6 +246,7 @@ class TaskApp:
             self.manager.mark_task_completed(task_id)
             self.load_tasks()
         except IndexError:
+            logger.warning("Спроба завершити задачу без вибору.")
             messagebox.showerror("Помилка", "Будь ласка, виберіть завдання.")
 
     def delete_task(self):
@@ -240,6 +257,7 @@ class TaskApp:
             self.manager.delete_task(task_id)
             self.load_tasks()
         except IndexError:
+            logger.warning("Спроба видалити задачу без вибору.")
             messagebox.showerror("Помилка", "Будь ласка, виберіть завдання.")
 
     def clear_entries(self):
@@ -251,6 +269,8 @@ class TaskApp:
 
 
 if __name__ == "__main__":
+    logger.info("Запуск Task Manager.")
     root = tk.Tk()
     app = TaskApp(root)
     root.mainloop()
+    logger.info("Програма завершена.")
